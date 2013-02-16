@@ -1,12 +1,12 @@
 all: sass jade
 
-sass: sass/*.sass
-	sass --update sass:app/styles
+sass: app/sass/*.sass
+	sass --update app/sass:app/css
 
-jade: jade/*.jade
-	jade jade --out .
+jade: app/jade/*.jade
+	jade app/jade --out .
 
 clean:
 	rm -r .sass-cache/*
-	rm app/styles*
+	rm app/css*
 	rm *.html
