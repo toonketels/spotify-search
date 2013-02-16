@@ -1,18 +1,27 @@
 define(
   [
       'flight/component'
+    , '../ui/search-form'
   ], 
 
   function(
       createComponent
+    , SearchForm
   ) {
     
     return createComponent(Boot);
 
     function Boot() {
+      
       this.after('initialize', function(){
-        console.log('booted');
+        
+        SearchForm.attachTo('.search-form');
+
       });
+
+
+
+
     }
     
 
