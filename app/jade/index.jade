@@ -7,16 +7,19 @@ html(lang="en")
     link(rel="stylesheet", href="components/foundation/custom/foundation.min.css", rel="stylesheet")
     link(href="app/css/app.css", type="text/css", rel="stylesheet")
 
+    script(data-main="app/js/main_1.js", src='components/requirejs/require.js', type="text/javascript")
+
   body
     .row
       div(class="twelve columns")
         h1.subheader Search Spotify
           div(class="row")
-            div(class="three columns search-form")
+            div(class="three columns")
               h2.subheader Search
               div.search-form
-                input(type="text", class="search-form-input twelve")
-                a(class="button expand postfix search-form-btn one") Search
+                form
+                  input(type="text", class="search-form-input twelve")
+                  a(class="button expand postfix search-form-btn one") Search
               div(class="search-results")
                 h2.subheader Results
 
@@ -27,5 +30,3 @@ html(lang="en")
 
             div(class="three columns data-summary")
               h2.subheader Data summary
-
-    script(data-main="app/js/main_1.js", src='components/requirejs/require.js', type="text/javascript")

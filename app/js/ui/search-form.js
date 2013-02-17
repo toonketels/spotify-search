@@ -10,6 +10,7 @@ define(
     function SearchForm() {
 
       this.after('initialize', function() {
+        $(this.attr.searchFormButton).unbind('click');
         this.on('click', {
           searchFormButton: this.search
         });
@@ -21,10 +22,13 @@ define(
       });
 
       this.search = function() {
+        console.log('clicked search button');
       	var searchPhrase = this.select('searchFormInput').val();
+
       	this.trigger('performSearch', {
       	  searchPhrase: searchPhrase
       	});
+
       }
 
     }

@@ -2,11 +2,13 @@ define(
   [
       'flight/component'
     , '../ui/search-form'
+    , '../data/search-spotify'
   ], 
 
   function(
       createComponent
     , SearchForm
+    , SearchSpotify
   ) {
     
     return createComponent(Boot);
@@ -16,7 +18,8 @@ define(
       this.after('initialize', function(){
         
         SearchForm.attachTo('.search-form');
-
+        SearchSpotify.attachTo(document);
+        
       });
 
 
