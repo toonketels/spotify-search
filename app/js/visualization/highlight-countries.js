@@ -32,14 +32,15 @@ define(
             }, this)
             .join(', ');
 
-          // Reset previous selection and hightlight current...
+          // Reset previous selection...
           d3.selectAll('.country')
-            .classed('is-hightlighed', false)
+            .classed('is-highlighted', false)
             .transition()
               .style('fill', '#333');
           
+          // And highlight current selection.
           d3.selectAll(availability)
-            .classed('is-hightlighed', true)
+            .classed('is-highlighted', true)
             .transition()
               .style('fill', 'green');
         }

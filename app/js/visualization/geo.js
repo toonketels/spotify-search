@@ -6,8 +6,9 @@ define(
       'flight/component'
     , 'components/d3/d3'
     , './highlight-countries'
+    , './map-hover'
   ],
-  function(createComponent, d3, HightlightCountries){
+  function(createComponent, d3, HightlightCountries, MapHover){
 
 
     return createComponent(Geo);
@@ -121,24 +122,14 @@ define(
                 .style('fill', '#333')
                 .call(drag);
   
-            // Add behavior
-            countries
-              .on('mouseover', hoverAction)
-              .on('mouseout', stopHoverAction)
-              .on('click', function(event, data) {
-                  // Trigger a custom event.
-                  self.trigger('countryClicked', {obj: event});
-              });
+            // Trigger a custom event.
+            countries.on('click', function(event, data) {
+              self.trigger('countryClicked', {obj: event});
+            });
 
-            function hoverAction(data, index) {
-              d3.select(countries[0][index])
-                .transition()
-                .style('fill', 'red');
-            }
-  
-            function stopHoverAction(data, index) {
-              d3.select(countries[0][index]).transition().style('fill', '#333');            
-            }
+            // Add behavior
+            MapHover.attachTo(self.$node);
+
           });
       } 
     }
