@@ -32,7 +32,7 @@ require(
 
   function(debug, Boot){
 	
-  	debug.enable(true);
+  	// debug.enable(true);
     // Do booting in boot, so if we change
     // something, the bust will make the cache break.
   	Boot.attachTo(document);

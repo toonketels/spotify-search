@@ -33,8 +33,9 @@ define(
 
       	embed = '<iframe src="https://embed.spotify.com/?uri='+data.spotifyUri+'&view=list" width="250" height="80" frameborder="0" allowtransparency="true"></iframe>';
 
-      	result = embed;
-      	result += '<hr />';
+      	//result = embed;
+      	result = '';
+        result += '<hr />';
       	result += (data.type === 'track') ? this.displayTrackDetails(data) : this.dipslayAlbumDetails(data);
 
       	this.select('dataPlaceholder').html(result);

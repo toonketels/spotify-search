@@ -8,26 +8,87 @@ define(
   ],
   function(createComponent, d3){
 
-//          window.geoSelect = function(){
-//              d3.selectAll('#PAK').transition().style('fill', 'green');
-//          }
 
     return createComponent(Geo);
 
+
     function Geo() {
 
-      var svg, drag, projection;
+      var svg, drag, projection, countryMapping, countries;
 
+
+      /**
+       * Perform setup:
+       *
+       * Load data, display initial map and
+       * update map when searchResultDetailRequestedAugmented is triggered.
+       */
       this.after('initialize', function(){
+        this.setUpCountries();
         this.setUpMap();
         this.setUpDrag();
         this.displayMap();
+
+        this.on(document, 'searchResultDetailRequestedAugmented', this.highLightCountries);
       });
 
+
+      /**
+       * Default attributes.
+       */
       this.defaultAttrs({
           'width': 600
         , 'height': 600
       });
+
+
+      /**
+       * Will hightlight countries on the map.
+       */
+      this.highLightCountries = function(ev, d) {
+
+        if(d.type === 'track') {
+
+          // Create selector string from "US RU" => "#USA, #RUS"
+          var availability = d.data.album.availability.territories
+            .split(' ')
+            .map(function(d) {
+              return '#'+this.getAlpha3CodeFor(d);
+            }, this)
+            .join(', ');
+
+          // Reset previous selection and hightlight current...
+          d3.selectAll('.country').transition().style('fill', '#333');
+          d3.selectAll(availability).transition().style('fill', 'green');
+        }
+      }
+
+
+      /**
+       * Loads the countries mapping.
+       *
+       * Nota: we do this early an expect the csv to be loaded
+       * as soon as we start making call. This is however not guaranteed.
+       * ToDo: ensure this is sepup before we make calls.
+       */
+      this.setUpCountries = function() {
+        d3.csv('app/assets/wikipedia-iso-country-codes.csv', function(er, d) {
+          countryMapping = d;
+        }); 
+      }
+
+      this.getAlpha3CodeFor = function(alpha2Code) {
+        for (var i = 0, len = countryMapping.length; i < len; i++) {
+          if(countryMapping[i]['Alpha-2 code'] === alpha2Code) return countryMapping[i]['Alpha-3 code'];
+        }
+      }
+
+
+      this.getAlpha2Codefor = function(alpha3Code) {
+        for (var i = 0, len = countryMappin.length; i < len; i++) {
+          if(countryMapping[i]['Alpha-3 code'] === alpha3Code) return countryMapping[i]['Alpha-2 code'];
+        }
+      }
 
 
       /**
@@ -46,7 +107,6 @@ define(
           .translate([this.attr.width/2,this.attr.height/2])
           .clipAngle(90);
 
-
         // New geographic path generator.
         // Path defaults to albersUsa but we need the orthographic.
         path = d3.geo.path()
@@ -55,7 +115,7 @@ define(
 
 
       /**
-       * Sets dragbehavior
+       * Sets map dragbehavior.
        */
       this.setUpDrag = function() {
 
@@ -64,14 +124,12 @@ define(
           .origin(Object)
           .on('drag', dragMove);
 
-       
         // Rotate the sphere while dragging...
         function dragMove() {
           rotation = projection.rotate();
           projection.rotate([rotation[0] + d3.event.dx, rotation[1] - d3.event.dy]);
           svg.selectAll("path").attr("d", path);
         }
-
 
         // A background element to catch the drag behavior...
         var rect = svg.selectAll('.drag-surface')
@@ -100,7 +158,7 @@ define(
             projection.rotate([0, -50]);
   
             // Draw the countries
-            var countries = svg.selectAll('.country')
+            countries = svg.selectAll('.country')
                 .data(data.features)
               .enter()
                 .append('path')
@@ -131,8 +189,6 @@ define(
               d3.select(countries[0][index]).transition().style('fill', '#333');            
             }
           });
-      }
-
+      } 
     }
-
 });
