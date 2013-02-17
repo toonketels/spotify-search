@@ -13,6 +13,9 @@ require.config({
       , 'app/js/boot/boot': {
             deps: ['components/flight/lib/index']
         }
+      , 'components/d3/d3': {
+            exports: 'd3'
+        }
     }
   , map: {
         '*': {

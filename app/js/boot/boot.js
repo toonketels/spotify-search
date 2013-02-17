@@ -6,6 +6,7 @@ define(
     , '../data/data'
     , '../ui/display-tracks-results'
     , '../ui/display-detail'
+    , '../visualization/geo'
   ], 
 
   function(
@@ -15,6 +16,7 @@ define(
     , DataStore
     , DisplayTracksResults
     , DisplayDetail
+    , Geo
   ) {
     
     return createComponent(Boot);
@@ -28,6 +30,7 @@ define(
         DataStore.attachTo(document);
         DisplayTracksResults.attachTo('.search-results');
         DisplayDetail.attachTo('.data-summary');
+        Geo.attachTo('.visualization');
 
       });
 
