@@ -33,8 +33,15 @@ define(
             .join(', ');
 
           // Reset previous selection and hightlight current...
-          d3.selectAll('.country').transition().style('fill', '#333');
-          d3.selectAll(availability).transition().style('fill', 'green');
+          d3.selectAll('.country')
+            .classed('is-hightlighed', false)
+            .transition()
+              .style('fill', '#333');
+          
+          d3.selectAll(availability)
+            .classed('is-hightlighed', true)
+            .transition()
+              .style('fill', 'green');
         }
       }
 
