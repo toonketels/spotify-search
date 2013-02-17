@@ -22,7 +22,6 @@ define(
       });
 
       this.search = function() {
-        console.log('clicked search button');
       	var searchPhrase = this.select('searchFormInput').val();
 
       	this.trigger('performSearch', {

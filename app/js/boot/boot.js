@@ -5,6 +5,7 @@ define(
     , '../data/search-spotify'
     , '../data/data'
     , '../ui/display-tracks-results'
+    , '../ui/display-detail'
   ], 
 
   function(
@@ -13,6 +14,7 @@ define(
     , SearchSpotify
     , DataStore
     , DisplayTracksResults
+    , DisplayDetail
   ) {
     
     return createComponent(Boot);
@@ -25,6 +27,7 @@ define(
         SearchSpotify.attachTo(document);
         DataStore.attachTo(document);
         DisplayTracksResults.attachTo('.search-results');
+        DisplayDetail.attachTo('.data-summary');
 
       });
 
