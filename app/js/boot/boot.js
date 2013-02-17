@@ -3,6 +3,7 @@ define(
       'flight/component'
     , '../ui/search-form'
     , '../data/search-spotify'
+    , '../data/data'
     , '../ui/display-tracks-results'
   ], 
 
@@ -10,6 +11,7 @@ define(
       createComponent
     , SearchForm
     , SearchSpotify
+    , DataStore
     , DisplayTracksResults
   ) {
     
@@ -21,6 +23,7 @@ define(
         
         SearchForm.attachTo('.search-form');
         SearchSpotify.attachTo(document);
+        DataStore.attachTo(document);
         DisplayTracksResults.attachTo('.search-results');
 
       });
