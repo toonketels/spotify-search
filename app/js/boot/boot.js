@@ -8,6 +8,7 @@ define(
     , '../ui/display-detail'
     , '../visualization/geo'
     , '../visualization/countries-grid'
+    , '../visualization/hover-summary'
   ], 
 
   function(
@@ -19,6 +20,7 @@ define(
     , DisplayDetail
     , Geo
     , CountriesGrid
+    , HoverSummary
   ) {
     
     return createComponent(Boot);
@@ -34,6 +36,7 @@ define(
         DisplayDetail.attachTo('.data-summary');
         Geo.attachTo('.visualization');
         CountriesGrid.attachTo('.data-summary-countries-grid');
+        HoverSummary.attachTo('.data-summary-hover');
 
 
       });

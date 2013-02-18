@@ -7,11 +7,12 @@ define(
     , 'components/d3/d3'
     , './highlight-countries'
     , './map-hover'
+    , '../mixins/with-country-events'
   ],
-  function(createComponent, d3, HightlightCountries, MapHover){
+  function(createComponent, d3, HightlightCountries, MapHover, withCountryEvents){
 
 
-    return createComponent(Geo);
+    return createComponent(Geo, withCountryEvents);
 
 
     function Geo() {
@@ -121,29 +122,10 @@ define(
                 .style('fill', '#333')
                 .call(drag);
   
-            // Trigger a custom events...
-            countries
-              .on('click', function(data, i) {
-                self.trigger('countryClicked', {
-                    'type': 'country'
-                  , 'id': data.id
-                  , 'index': i
-                });
-              })
-              .on('mouseover', function(data, i) {
-                self.trigger('countryHover', {
-                    'type': 'country'
-                  , 'id': data.id
-                  , 'index': i
-                })
-              })
-              .on('mouseout', function(data, i){
-                self.trigger('countryHoverStop', {
-                    'type': 'country'
-                  , 'id': data.id
-                  , 'index': i
-                })            
-              });
+            // Trigger events (via mixin).
+            // We expect the data object passed by d3 to have the key
+            // `id` to represent the ID (like US).
+            self.emitCustomCountryEvents(countries, 'country', 'id');
 
             // Add behavior
             MapHover.attachTo(self.$node);

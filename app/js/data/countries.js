@@ -39,6 +39,14 @@ define(
       }
     }
 
+    var getName = function(code) {
+      var alpha2 = (code.length == 2) ? code : getAlpha2Codefor(code);
+
+      for (var i = 0, len = countryMapping.length; i < len; i++) {
+        if(countryMapping[i]['Alpha-2 code'] === alpha2) return countryMapping[i]['English short name lower case'];
+      }
+    }
+
     var getAllCodes = function(isoType) {
       if (isoType === 'alpha-3') {
         return countryMapping.map(function(value){
@@ -57,6 +65,7 @@ define(
       , 'getAlpha2Codefor': getAlpha2Codefor
       , 'getAllCodes': getAllCodes
       , 'convertCode': convertCode
+      , 'getName': getName
     }
 
   });

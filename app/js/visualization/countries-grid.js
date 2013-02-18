@@ -4,12 +4,13 @@ define(
     , 'components/d3/d3'
     , '../data/countries'
     , './grid-hover'
+    , '../mixins/with-country-events'
   ], 
 
-  function(createComponent, d3, countryStore, GridHover){
+  function(createComponent, d3, countryStore, GridHover, withCountryEvents){
 
 
-    return createComponent(CountriesGrid);
+    return createComponent(CountriesGrid, withCountryEvents);
 
 
     function CountriesGrid() {
@@ -80,29 +81,11 @@ define(
                 return Math.floor(i / 6) * 20 
               });
 
-        // Trigger events
-        text
-          .on('click', function(data, i) {
-            self.trigger('countryClicked', {
-                'type': 'code'
-              , 'id': data
-              , 'index': i
-            });
-          })
-          .on('mouseover', function(data, i) {
-            self.trigger('countryHover', {
-                'type': 'code'
-              , 'id': data
-              , 'index': i
-            })
-          })
-          .on('mouseout', function(data, i){
-            self.trigger('countryHoverStop', {
-                'type': 'code'
-              , 'id': data
-              , 'index': i
-            })            
-          });
+        // Trigger events (via mixin).
+        // We expect the data String passed by d3 to be
+        // the ID (like US).
+        self.emitCustomCountryEvents(text, 'code');
+
 
         // Remove...
         text.exit()
