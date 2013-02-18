@@ -82,6 +82,13 @@ define(
 
         // Trigger events
         text
+          .on('click', function(data, i) {
+            self.trigger('countryClicked', {
+                'type': 'code'
+              , 'id': data
+              , 'index': i
+            });
+          })
           .on('mouseover', function(data, i) {
             self.trigger('countryHover', {
                 'type': 'code'

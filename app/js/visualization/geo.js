@@ -121,10 +121,14 @@ define(
                 .style('fill', '#333')
                 .call(drag);
   
-            // Trigger a custom event.
+            // Trigger a custom events...
             countries
-              .on('click', function(event, data) {
-                self.trigger('countryClicked', {obj: event});
+              .on('click', function(data, i) {
+                self.trigger('countryClicked', {
+                    'type': 'country'
+                  , 'id': data.id
+                  , 'index': i
+                });
               })
               .on('mouseover', function(data, i) {
                 self.trigger('countryHover', {
