@@ -30,10 +30,23 @@ define(
         }
       }
 
+    window.getAllCodes = function(isoType) {
+      if (isoType === 'alpha-3') {
+        return countryMapping.map(function(value){
+          return value['Alpha-3 code'];
+        });
+      }
+
+      return countryMapping.map(function(value) {
+        return value['Alpha-2 code'];
+      });
+    }
+
 
     return {
         'getAlpha3CodeFor': getAlpha3CodeFor
       , 'getAlpha2Codefor': getAlpha2Codefor
+      , 'getAllCodes': getAllCodes
     }
 
   });

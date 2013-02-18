@@ -104,7 +104,6 @@ define(
         var self = this;
 
          d3.json('app/assets/countries.json', function(error, data){
-            console.log(data);
   
             // Position globe...
             projection.rotate([0, -50]);

@@ -13,14 +13,14 @@ define(
     function HighlightCountries() {
 
       this.after('initialize', function() {
-      	this.on(document, 'searchResultDetailRequestedAugmented', this.highLightCountries);
+      	this.on(document, 'searchResultDetailRequestedAugmented', this.highlightCountries);
       });
 
 
      /**
        * Will hightlight countries on the map.
        */
-      this.highLightCountries = function(ev, d) {
+      this.highlightCountries = function(ev, d) {
 
         if(d.type === 'track') {
 

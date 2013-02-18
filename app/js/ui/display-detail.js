@@ -53,11 +53,11 @@ define(
       	artists += '</ul>';
 
         album = '<h2>Album: '+data.data.album.name+'</h2>';
-        album += '<ul>';
-        territories = data.data.album.availability.territories.split(' ');
-        territories.forEach(function(territory, index){
-          album += '<li>'+territory+'</li>';
-        });
+//        album += '<ul>';
+//        territories = data.data.album.availability.territories.split(' ');
+//        territories.forEach(function(territory, index){
+//          album += '<li>'+territory+'</li>';
+//        });
 
       	return artists+album; 
       };

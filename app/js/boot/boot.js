@@ -7,6 +7,7 @@ define(
     , '../ui/display-tracks-results'
     , '../ui/display-detail'
     , '../visualization/geo'
+    , '../visualization/countries-grid'
   ], 
 
   function(
@@ -17,6 +18,7 @@ define(
     , DisplayTracksResults
     , DisplayDetail
     , Geo
+    , CountriesGrid
   ) {
     
     return createComponent(Boot);
@@ -31,6 +33,8 @@ define(
         DisplayTracksResults.attachTo('.search-results');
         DisplayDetail.attachTo('.data-summary');
         Geo.attachTo('.visualization');
+        CountriesGrid.attachTo('.data-summary-countries-grid');
+
 
       });
 
