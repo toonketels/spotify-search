@@ -5,12 +5,13 @@ define(
     , '../data/countries'
     , './grid-hover'
     , '../mixins/with-country-events'
+    , '../mixins/with-global-config'
   ], 
 
-  function(createComponent, d3, countryStore, GridHover, withCountryEvents){
+  function(createComponent, d3, countryStore, GridHover, withCountryEvents, withGlobalConfig){
 
 
-    return createComponent(CountriesGrid, withCountryEvents);
+    return createComponent(CountriesGrid, withCountryEvents, withGlobalConfig);
 
 
     function CountriesGrid() {
@@ -58,6 +59,7 @@ define(
 
         // Update...
         text.attr('class', 'update code')
+          .style('fill', this.colors.highlight.darker)
           .transition()
             .delay(400)
             .duration(500)
@@ -74,24 +76,26 @@ define(
               .attr('y', -20)
               .attr('x', function(d, i) { return (i % 6) * 30 })
               .text(function(d) { return d; })
+              .style('fill', self.colors.highlight.regular)
             .transition()
               .delay(800)
               .duration(750)
               .attr('y', function(d, i) {
                 return Math.floor(i / 6) * 20 
-              });
+              })
+              .style('fill', self.colors.highlight.darker);
 
         // Trigger events (via mixin).
         // We expect the data String passed by d3 to be
         // the ID (like US).
         self.emitCustomCountryEvents(text, 'code');
 
-
         // Remove...
         text.exit()
             .attr('class', 'exit code')
+            .style('fill', '#000')
           .transition()
-            .duration(500)
+            .duration(1400)
             .attr('x', 220)
             .remove();
       }

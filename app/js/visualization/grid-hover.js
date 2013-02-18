@@ -3,11 +3,12 @@ define(
       'flight/component'
     , 'components/d3/d3'
     , '../data/countries'
+    , '../mixins/with-global-config'
   ],
-  function(createComponent, d3, countryMapping){
+  function(createComponent, d3, countryMapping, withGlobalConfig){
 
 
-    return createComponent(GridHover);
+    return createComponent(GridHover, withGlobalConfig);
 
 
     function GridHover() {
@@ -36,15 +37,14 @@ define(
       this.hoverAction = function(event, data) {
         d3.select(this.getSelector(data))
           .transition()
-          .style('fill', 'red');
+          .style('fill', this.colors.highlight.regular);
       }
 
 
       this.hoverActionStop = function(event, data) {
         var selector = this.getSelector(data);
 
-        d3.select(selector).filter('.is-highlighted').transition().style('fill', 'green');            
-        d3.select(selector).filter(':not(.is-highlighted)').transition().style('fill', '#333'); 
+        d3.select(selector).transition().style('fill', this.colors.highlight.darker);            
       }
     }
 });

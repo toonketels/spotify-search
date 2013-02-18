@@ -3,11 +3,12 @@ define(
       'flight/component'
     , 'components/d3/d3'
     , '../data/countries'
+    , '../mixins/with-global-config'
   ],
-  function(createComponent, d3, countryMapping){
+  function(createComponent, d3, countryMapping, withGlobalConfig){
 
 
-    return createComponent(MapHover);
+    return createComponent(MapHover, withGlobalConfig);
 
 
     function MapHover() {
@@ -34,17 +35,25 @@ define(
 
 
       this.hoverAction = function(event, data) {
-         d3.select(this.getSelector(data))
-           .transition()
-           .style('fill', 'red');
+//         d3.select(this.getSelector(data))
+//           .transition()
+//           .style('fill', this.colors.highlight.lightest);
+
+        d3.select(this.getSelector(data)).filter('.is-highlighted')
+          .transition()
+          .style('fill', this.colors.highlight.regular);            
+        
+        d3.select(this.getSelector(data)).filter(':not(.is-highlighted)')
+          .transition()
+          .style('fill', '#444'); 
       }
 
 
       this.hoverActionStop = function(event, data) {
         var selector = this.getSelector(data);
 
-        d3.select(selector).filter('.is-highlighted').transition().style('fill', 'green');            
-        d3.select(selector).filter(':not(.is-highlighted)').transition().style('fill', '#333'); 
+        d3.select(selector).filter('.is-highlighted').transition().style('fill', this.colors.highlight.darker);            
+        d3.select(selector).filter(':not(.is-highlighted)').transition().style('fill', '#000'); 
       }
     }
 });

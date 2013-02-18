@@ -5,4 +5,7 @@ body {
   fill: rgba(255, 255, 255, 0); }
 
 text {
-  font: bold 12px; }
+  font: bold 12px;
+  fill: #1d7074; }
+  text.exit {
+    fill: black; }

@@ -119,7 +119,7 @@ define(
                 })
                 .attr('id', function(d, i) { return d.id })
                 .attr('d', path)
-                .style('fill', '#333')
+                .style('fill', '#000')
                 .call(drag);
   
             // Trigger events (via mixin).

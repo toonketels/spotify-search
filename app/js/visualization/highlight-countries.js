@@ -3,11 +3,12 @@ define(
       'flight/component'
     , 'components/d3/d3'
     , '../data/countries'
+    , '../mixins/with-global-config'
   ],
-  function(createComponent, d3, countryStore) {
+  function(createComponent, d3, countryStore, withGlobalConfig) {
 
 
-    return createComponent(HighlightCountries);
+    return createComponent(HighlightCountries, withGlobalConfig);
 
 
     function HighlightCountries() {
@@ -32,17 +33,26 @@ define(
             }, this)
             .join(', ');
 
+          console.log('av');
+          console.log(availability);
+
           // Reset previous selection...
           d3.selectAll('.country')
+            //.filter(':not('+availability+')')
+            //filter(':not(.is-highlighted)
             .classed('is-highlighted', false)
             .transition()
-              .style('fill', '#333');
+              .style('fill', '#000');
           
           // And highlight current selection.
           d3.selectAll(availability)
             .classed('is-highlighted', true)
             .transition()
-              .style('fill', 'green');
+              .duration(50)
+              .style('fill', this.colors.highlight.regular)
+            .transition()
+              .duration(500)
+              .style('fill', this.colors.highlight.darker);
         }
       }
 

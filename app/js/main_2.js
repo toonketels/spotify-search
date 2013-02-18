@@ -21,7 +21,7 @@ require.config({
         '*': {
             'flight/component': 'components/flight/lib/component'
         }
-   }
+    }
 });
 
 require(
