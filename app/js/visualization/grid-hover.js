@@ -7,10 +7,10 @@ define(
   function(createComponent, d3, countryMapping){
 
 
-    return createComponent(MapHover);
+    return createComponent(GridHover);
 
 
-    function MapHover() {
+    function GridHover() {
 
       /**
        * Initialization. Bind to hover events.
@@ -29,14 +29,14 @@ define(
        * country: #RUS
        */
       this.getSelector = function(data) {
-        return (data.type === 'country') ? '#'+data.id : '#'+countryMapping.convertCode(data.id);
+        return (data.type === 'code') ? '#'+data.id : '#'+countryMapping.convertCode(data.id);
       }
 
 
       this.hoverAction = function(event, data) {
-         d3.select(this.getSelector(data))
-           .transition()
-           .style('fill', 'red');
+        d3.select(this.getSelector(data))
+          .transition()
+          .style('fill', 'red');
       }
 
 

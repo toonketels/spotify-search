@@ -2,10 +2,11 @@ define(
   [
       'flight/component'
     , 'components/d3/d3'
-    , '../data/countries'  
+    , '../data/countries'
+    , './grid-hover'
   ], 
 
-  function(createComponent, d3, countryStore){
+  function(createComponent, d3, countryStore, GridHover){
 
 
     return createComponent(CountriesGrid);
@@ -49,11 +50,13 @@ define(
        */    
       this.updateChart = function(data) {
 
+        var self = this;
+
         var text = svg.selectAll('text')
           .data(data, function(d) { return d; });
 
         // Update...
-        text.attr('class', 'update')
+        text.attr('class', 'update code')
           .transition()
             .delay(400)
             .duration(500)
@@ -64,7 +67,8 @@ define(
 
         // Enter
         text.enter().append('text')
-              .attr('class', 'enter')
+              .attr('id', function(d, i) { return d })
+              .attr('class', 'enter code')
               .attr('dy', '.15em')
               .attr('y', -20)
               .attr('x', function(d, i) { return (i % 6) * 30 })
@@ -76,9 +80,26 @@ define(
                 return Math.floor(i / 6) * 20 
               });
 
+        // Trigger events
+        text
+          .on('mouseover', function(data, i) {
+            self.trigger('countryHover', {
+                'type': 'code'
+              , 'id': data
+              , 'index': i
+            })
+          })
+          .on('mouseout', function(data, i){
+            self.trigger('countryHoverStop', {
+                'type': 'code'
+              , 'id': data
+              , 'index': i
+            })            
+          });
+
         // Remove...
         text.exit()
-            .attr('class', 'exit')
+            .attr('class', 'exit code')
           .transition()
             .duration(500)
             .attr('x', 220)
@@ -100,6 +121,9 @@ define(
             .attr('height', this.attr.height)
           .append('g')
             .attr('transform', 'translate(10, 15)');
+
+        // Attach behaviors
+        GridHover.attachTo(self.$node);
 
         // For the moment: dont display all countries
         // var countries = countryStore.getAllCodes();

@@ -25,12 +25,21 @@ define(
       }
 
     var getAlpha2Codefor = function(alpha3Code) {
-        for (var i = 0, len = countryMappin.length; i < len; i++) {
+        for (var i = 0, len = countryMapping.length; i < len; i++) {
           if(countryMapping[i]['Alpha-3 code'] === alpha3Code) return countryMapping[i]['Alpha-2 code'];
         }
       }
 
-    window.getAllCodes = function(isoType) {
+    var convertCode = function(code) {
+      if (code.length === 3) {
+        return getAlpha2Codefor(code);
+      }
+      if (code.length === 2) {
+        return getAlpha3CodeFor(code);
+      }
+    }
+
+    var getAllCodes = function(isoType) {
       if (isoType === 'alpha-3') {
         return countryMapping.map(function(value){
           return value['Alpha-3 code'];
@@ -47,6 +56,7 @@ define(
         'getAlpha3CodeFor': getAlpha3CodeFor
       , 'getAlpha2Codefor': getAlpha2Codefor
       , 'getAllCodes': getAllCodes
+      , 'convertCode': convertCode
     }
 
   });

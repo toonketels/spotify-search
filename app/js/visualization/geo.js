@@ -122,9 +122,24 @@ define(
                 .call(drag);
   
             // Trigger a custom event.
-            countries.on('click', function(event, data) {
-              self.trigger('countryClicked', {obj: event});
-            });
+            countries
+              .on('click', function(event, data) {
+                self.trigger('countryClicked', {obj: event});
+              })
+              .on('mouseover', function(data, i) {
+                self.trigger('countryHover', {
+                    'type': 'country'
+                  , 'id': data.id
+                  , 'index': i
+                })
+              })
+              .on('mouseout', function(data, i){
+                self.trigger('countryHoverStop', {
+                    'type': 'country'
+                  , 'id': data.id
+                  , 'index': i
+                })            
+              });
 
             // Add behavior
             MapHover.attachTo(self.$node);
