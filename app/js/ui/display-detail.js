@@ -35,7 +35,6 @@ define(
 
       	//result = embed;
       	result = '';
-        result += '<hr />';
       	result += (data.type === 'track') ? this.displayTrackDetails(data) : this.dipslayAlbumDetails(data);
 
       	this.select('dataPlaceholder').html(result);
@@ -45,19 +44,15 @@ define(
 
       	var album, territories, artists, output;
 
-      	artists = '<h2>Artists</h2>';
+      	artists = '<h3>Artists</h3>';
       	artists += '<ul>';
         data.data.artists.forEach(function(artist){
           artists += '<li>'+artist.name+'</li>';
         });
       	artists += '</ul>';
 
-        album = '<h2>Album: '+data.data.album.name+'</h2>';
-//        album += '<ul>';
-//        territories = data.data.album.availability.territories.split(' ');
-//        territories.forEach(function(territory, index){
-//          album += '<li>'+territory+'</li>';
-//        });
+        album = '<h3>Album</h3>';
+        album += '<ul><li>'+data.data.album.name+'</li></ul>';
 
       	return artists+album; 
       };

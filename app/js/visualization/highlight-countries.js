@@ -33,9 +33,6 @@ define(
             }, this)
             .join(', ');
 
-          console.log('av');
-          console.log(availability);
-
           // Reset previous selection...
           d3.selectAll('.country')
             //.filter(':not('+availability+')')

@@ -22,13 +22,15 @@ define(
 
 
       this.hoverAction = function(event, data) {
-        var output = '<p>'+ countryMapping.getName(data.id) +'</p>';
+        var output = '<h3>Country</h3>';
+        output += '<p><span class"secondary label">'+ countryMapping.getName(data.id) +'</span></p>';
         this.$node.html(output);
       }
 
 
       this.hoverActionStop = function(event, data) {
-        this.$node.html('');
+        var output = '<h3>Country</h3>';
+        this.$node.html(output);
       }
     }
 });

@@ -24,11 +24,14 @@ define(
        * Display the artists results.
        */
       this.displayTracksResults = function(event, data) {
-      	var result = data.results.map(function(track) {
+
+        var results = data.results.map(function(track) {
       	  return '<li class="search-result-item track" data-spotifyuri="'+track.href+'" data-type="track">'+track.name+'</li>';
       	});
+
+        var output = '<h3>Tracks</h3><ul>' + results.join('') + '</ul>';
         
-      	this.$node.html(result);
+      	this.$node.html(output);
 
         // Attach behaviors to it.
         SearchResultItemActions.attachTo('.search-result-item.track');

@@ -8,26 +8,23 @@ html(lang="en")
     link(href="app/css/app.css", type="text/css", rel="stylesheet")
 
     script(data-main="app/js/main_2.js", src='components/requirejs/require.js', type="text/javascript")
+    <!-- script(data-main="app/js/build/main-build", src='components/requirejs/require.js', type="text/javascript") -->
 
   body
     .row
       div(class="twelve columns")
         h1.subheader Search Spotify
-          div(class="row")
-            div(class="three columns")
-              h2.subheader Search
-              div.search-form
-                form
-                  input(type="text", class="search-form-input twelve")
-                  a(class="button expand postfix search-form-btn one") Search
-              div(class="search-results")
-                h2.subheader Results
-
-            div(class="three columns data-summary")
-              h2.subheader Data summary
-              div.data-summary-hover
-              div.data-summary-data
-              div.data-summary-countries-grid
-
-            div(class="six columns visualization")
-              h2.subheader Visualization
+        p Search Spotify and find out in which countries you can listen to the tracks.
+        div(class="row")
+          div(class="three columns")
+            div(class="search-form row collapse")
+              div(class="nine mobile-three columns")
+                input(type="text", class="search-form-input")
+              div(class="three mobile-one columns")
+                a(class="button expand postfix search-form-btn") Search
+            div(class="search-results")
+          div(class="three columns data-summary")
+            div.data-summary-hover
+            div.data-summary-data
+            div.data-summary-countries-grid
+          div(class="six columns visualization")

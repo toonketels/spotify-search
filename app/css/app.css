@@ -1,11 +1,34 @@
 body {
   background: white url("../assets/texture-noise.png") repeat; }
 
+h3 {
+  text-transform: uppercase;
+  font-size: 14px; }
+
 .drag-surface {
   fill: rgba(255, 255, 255, 0); }
 
-text {
-  font: bold 12px;
-  fill: #1d7074; }
-  text.exit {
-    fill: black; }
+.data-summary-hover {
+  height: 70px; }
+
+ul li {
+  list-style: none; }
+
+.search-result-item {
+  cursor: pointer;
+  padding: 5px 10px;
+  position: relative;
+  left: -10px; }
+  .search-result-item.selected {
+    background-color: #666666;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #515151), color-stop(0.1, #7c7c7c));
+    color: #f1f1f1;
+    text-shadow: 0 1px 0 #515151;
+    margin: 2px 0;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
+
+.button {
+  background: #1d7074; }
+  .button:hover {
+    background: #01939a; }

@@ -110,6 +110,8 @@ define(
 
         var self = this;
 
+        this.$node.append('<h3>availability</h3>');
+
         svg = d3.select(this.node).append('svg')
             .attr('width', this.attr.width)
             .attr('height', this.attr.height)
